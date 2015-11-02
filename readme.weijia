@@ -1,0 +1,40 @@
+
+2015-08-30 00:20
+BUG: propagate.f90
+         if (vscount == 2 .and. abs(u1-u2)>1.0e-10 ) then
+! this line commented by weijia. 2015-08-30 00:06
+!            if (dot_product(wn1,wn2) < 0.999_dp) then
+            if (dot_product(wn1,wn2) < 0.9099_dp) then
+I have no idea the if-statement, but I use 0.9099 replacing 0.999, it can works and outputs the arrival times.
+
+
+2015-08-28
+There are too many versions, that I fixed bugs. Now I tar a version v2.0, where all known bugs are fixed. These bugs are listed below.
+
+
+
+Additioanl instructions by Weijia Sun. 2015-08-13
+
+1. compile and install
+After you have installed the software package following the original instructions, 
+enter swsrc/, execute './compile'
+
+2. directory
+swsrc: a modified version of gmtslice, renamed gmtslices
+swscript: a python script running gmtslices, and plot bash file *.plt
+		  You can use these files to plot slices.
+		  
+3. Bugs
+I have fixed two bug of fmcode. please see the fmcode/readme.weijia
+
+
+gmtslices.f90, a revision by Weijia Sun, due to the depth is negative in the original version.
+tomo3d.py, a python version of tomo3d in bin directory
+fmtomo.1.0.1.tar.gz, fix a bug, 'maximim point'
+fmtomo.1.0.2.tar.gz, fix 2nd bug, 'segmentation fault', related to allocate
+
+fmtomov1.0a.tar.gz, original version of Nick Rawlinson, 
+but untar into a folder 'fmtomo'. Nick's version release 
+all files in current directory. it is nasty.
+
+
