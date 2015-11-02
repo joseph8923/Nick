@@ -1,4 +1,14 @@
 
+v1.0.7 2015-11-02
+Bug fixed in rays.f90: set the ray to be invalid
+!> Weijia 2015-11-02 I have no idea what it means. I also set to a invalid raypath
+!        if(s%is_local .and. raysec%place_in_sequence == 1)  stop ' unable to find local source in ray section 1' 
+        if(s%is_local .and. raysec%place_in_sequence == 1)  then
+            raysec%ray%valid = .false.
+            return
+        endif
+
+
 v1.0.6 2015-11-02
 Bug fixed: rays.f90
 !> while the source is quite near the boundary, the ray may escape the model. 

@@ -616,7 +616,13 @@ itloop   : do
 
         end do ploop
 
-        if(s%is_local .and. raysec%place_in_sequence == 1)  stop ' unable to find local source in ray section 1'   
+!> Weijia 2015-11-02 I have no idea what it means. I also set to a invalid raypath
+!        if(s%is_local .and. raysec%place_in_sequence == 1)  stop ' unable to find local source in ray section 1' 
+        if(s%is_local .and. raysec%place_in_sequence == 1)  then
+            raysec%ray%valid = .false.
+            return
+        endif
+  
 
         if (outside) then
 
