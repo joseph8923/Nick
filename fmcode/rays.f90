@@ -464,7 +464,6 @@ itloop   : do
 
 
               ! calculate gradient at provisional next position
-
               call interpolate_time_gradient(tf,pp(1),pp(2),pp(3),grad1(1),grad1(2),grad1(3),verbose,outside,raysec)
               if (outside) then ; n=n-1 ; exit ploop ; endif
               if (.not.raysec%ray%valid) then; deallocate(pt) ; return ; endif
@@ -476,7 +475,7 @@ itloop   : do
               pt(3,n)=pt(3,n-1)-dl*(grad0(3)+grad1(3))/((pt(1,n)+pt(1,n-1))*cos(pt(2,n)))
 
               ! test again if an interface is crossed during the iteration, if so exit
-
+!				print *, pt(2,n), pt(3,n), (pt(1,n)+pt(1,n-1)), pt(1,n), pt(1,n-1)
               r_interface=interpolate_interface(pt(2,n),pt(3,n),iftop)
               if (pt(1,n) >= r_interface) then
 
@@ -626,10 +625,12 @@ itloop   : do
 
    ! find the intersection of the ray with the end interface
 
+
    x1=0.0_dp
    x2=dl
    f=pt(1,n-1) - interpolate_interface(pt(2,n-1),pt(3,n-1),ifend)
    fmid=pp(1)-r_interface
+
 
 
 ! check that interface is actually crossed, if not error stop
@@ -987,12 +988,12 @@ subroutine interpolate_time_gradient(tf,r,lat,long,dtdr,dtdlat,dtdlong,verbose,o
      end do
   end if
 
-  w(1:nnode)=w(1:nnode)/sum(w(1:nnode))
-
-!  write(1,*) 'itgrad:'
-!  do n=1,nnode
-!     write(1,'(2i5,4f12.5,3i5)') n,n_inode,w(n),tgrad(1:3,n),ir,ilat,ilong
+!  write(123,*) 'itgrad:'
+!  do i=1,nnode
+!     write(123,'(2i5,4f12.5,3i5)') i,n_inode,w(i),tgrad(1:3,i),ir,ilat,ilong
 !  end do
+
+  w(1:nnode)=w(1:nnode)/sum(w(1:nnode))
 
 
   dtdr    = sum(tgrad(1,1:nnode)*w(1:nnode))  
@@ -1000,6 +1001,12 @@ subroutine interpolate_time_gradient(tf,r,lat,long,dtdr,dtdlat,dtdlong,verbose,o
   dtdlong = sum(tgrad(3,1:nnode)*w(1:nnode))
 
 !  if (tf%id == 2) write(15,'(3i5,6f12.6)') ir,ilat,ilong,r,lat,long,dtdr,dtdlat,dtdlong
+
+! dtdr dtdlat dtdlon in same case is NAN
+  if (isnan(dtdr) .or. isnan(dtdlat) .or. isnan(dtdlong)) then
+     raysec%ray%valid = .false.
+     return
+  endif
 
   if (sqrt(dtdr**2+dtdlat**2+dtdlong**2) < 0.01_dp) then
      print *

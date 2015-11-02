@@ -1136,6 +1136,7 @@ if (no_pp_mode) then
 
 
    ! do the frechet derivatives for this ray if required
+   
 
             if (do_frechet_derivatives) then
 
@@ -1154,7 +1155,7 @@ if (no_pp_mode) then
                   endif
 
                endif
-
+			   
                call write_frechet_derivatives(n,m)
 
             endif
@@ -1179,7 +1180,6 @@ if (no_pp_mode) then
       end do    ! loop over rays/paths
 
    end do    !loop over receivers
-
 
 endif
 
@@ -1335,7 +1335,6 @@ if (n_receivers > 0 .and. (.not.no_pp_mode)) then
             if (file_mode) call clean_source_timefields(receiver(n)%ray(m)%source)
             if (file_mode .and. s%path(path_id)%refstep /= 0)  &
                  call clean_source_timefields(source(receiver(n)%source_equivalent))
-
 
          else           ! the original path was recognised as invalid during the timefield calculations
 

@@ -301,10 +301,13 @@ real(kind=dp) :: u,v,bu(4),bv(4),value
 ilat=floor((lat-iface%lat0)/iface%dlat0)+1
 ilong=floor((long-iface%long0)/iface%dlong0)+1
 
+!print *, long, lat, iface
+
 if (ilong < 2 .or. ilong > (iface%nlong-2)) then 
    print *,'interpolate_interface : interpolation outside range :ilong'
    print *,iface%id,ilong,ilat
    print *,long,lat
+   print *, iface%long0, iface%dlong0, iface%lat0, iface%dlat0
    print *,'if this happens during initialization your interface parameter '
    print *,'grid may not cover the entire propagation grid'
    stop

@@ -1,4 +1,20 @@
 
+v1.0.4 2015-11-02
+
+In some case, dtdr, dtdlat, or dtdlong would be NAN. It must be divided by zero. But I have no idea what was lead. Thus, I set the rays with the case to be invalid.
+
+This occurs while calling the subroutine of interpolate_time_gradient in rays.f90
+              ! calculate gradient at provisional next position
+              call interpolate_time_gradient(tf,pp(1),pp(2),pp(3),grad1(1),grad1(2),grad1(3),verbose,outside,raysec)
+
+in the subroutine of interpolate_time_gradient in rays.f90
+! dtdr dtdlat dtdlon in same case is NAN
+  if (isnan(dtdr) .or. isnan(dtdlat) .or. isnan(dtdlong)) then
+     raysec%ray%valid = .false.
+     return
+  endif
+
+
 v1.0.3 2015-11-02
 This version is same as v1.0 and v1.0.1-2. Since I am not familiar with github, redudant versions are generated.
 This is a backup version, before doing the debuging while I do the east Asia tomography.
