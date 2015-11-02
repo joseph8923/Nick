@@ -1,4 +1,8 @@
 
+v1.0.3 2015-11-02
+This version is same as v1.0 and v1.0.1-2. Since I am not familiar with github, redudant versions are generated.
+This is a backup version, before doing the debuging while I do the east Asia tomography.
+
 2015-08-30 00:20
 BUG: propagate.f90
          if (vscount == 2 .and. abs(u1-u2)>1.0e-10 ) then
