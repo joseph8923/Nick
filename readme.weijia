@@ -1,4 +1,7 @@
 
+v1.0.5 2015-11-02
+a new version same as v1.0.4, since forgot to compile these files to generate executable files.
+
 v1.0.4 2015-11-02
 
 In some case, dtdr, dtdlat, or dtdlong would be NAN. It must be divided by zero. But I have no idea what was lead. Thus, I set the rays with the case to be invalid.
