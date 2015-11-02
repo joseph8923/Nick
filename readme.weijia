@@ -1,4 +1,14 @@
 
+v1.0.6 2015-11-02
+Bug fixed: rays.f90
+!> while the source is quite near the boundary, the ray may escape the model. 
+!  if (outside.and.s%is_local) stop 'error in ray tracing:ray outside grid for local source'
+  if (outside.and.s%is_local)then
+    ray%valid = .false.
+    return
+  endif
+
+
 v1.0.5 2015-11-02
 a new version same as v1.0.4, since forgot to compile these files to generate executable files.
 

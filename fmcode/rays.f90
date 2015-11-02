@@ -79,7 +79,12 @@ subroutine trace_ray_from_receiver(rec,s,ray)
 
   end do
 
-  if (outside.and.s%is_local) stop 'error in ray tracing:ray outside grid for local source'
+!> while the source is quite near the boundary, the ray may escape the model 
+!  if (outside.and.s%is_local) stop 'error in ray tracing:ray outside grid for local source'
+  if (outside.and.s%is_local)then
+    ray%valid = .false.
+    return
+  endif
 
   if (outside.and.n>1) then
      
