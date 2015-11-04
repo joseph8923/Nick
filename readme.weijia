@@ -1,4 +1,21 @@
 
+v1.0.8 2015-11-04
+Bug fixed in 3dfm_main.f90: 
+In some case, it does not write the invalid path into frechet.dat. This would result in reading file end-of-file. 
+Definitely, the inversion would fail.
+
+The case would give some information like this
+
+            print *,'ray',m,' to receiver ',n, &
+                 ' : requested path was recognised as invalid during the timefield calculations'
+
+            !> Weijia, in this case, it would not to write the derivatives in frechet.dat
+            !> this would result in end-of-file reading during inversion. 2015-11-04
+            if (do_frechet_derivatives) then
+               call write_frechet_derivatives(n,m)
+            endif
+
+
 v1.0.7 2015-11-02
 Bug fixed in rays.f90: set the ray to be invalid
 !> Weijia 2015-11-02 I have no idea what it means. I also set to a invalid raypath

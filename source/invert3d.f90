@@ -722,10 +722,16 @@ CLOSE(30)
 ! will first read in the entire matrix to determine the
 ! number of non-zeo elements.
 !
+!> Weijia's debugging for end-of-file while reading frechet.dat
+!print *, frdatfile
+!print *, ntr
+!print *, nnfd
+
 OPEN(UNIT=30,FILE=frdatfile,STATUS='old')
 nnfd=0
 DO i=1,ntr
    READ(30,*)idm1,idm2,idm3,idm4,nrow
+!   write(199,*), i, idm1,idm2,idm3,idm4,nrow
    nnfd=nnfd+nrow
    IF(nrow.GT.0)THEN
       DO j=1,nrow
@@ -734,6 +740,7 @@ DO i=1,ntr
    ENDIF
 ENDDO
 CLOSE(30)
+
 ALLOCATE(frech(nnfd),fcoln(nnfd),cnfe(0:ntr))
 ALLOCATE(dobs(ntr),dmod(ntr),cd(ntr))
 OPEN(UNIT=30,FILE=frdatfile,STATUS='old')

@@ -1171,6 +1171,12 @@ if (no_pp_mode) then
             t_arrival=-1.0_dp               
             write(11,'(4i6,f15.6,2l5)') n,ray%source_id,m,k,t_arrival,ray%diffracted,ray%headwave
 
+            !> Weijia, in this case, it would not to write the derivatives in frechet.dat
+            !> this would result in end-of-file reading during inversion. 2015-11-04
+            if (do_frechet_derivatives) then
+               call write_frechet_derivatives(n,m)
+            endif
+
          endif
 
          if (save_rays_mode) call write_valid_rays(n,m)
@@ -1345,6 +1351,12 @@ if (n_receivers > 0 .and. (.not.no_pp_mode)) then
             k=0
             t_arrival=-1.0_dp               
             write(11,'(4i6,f15.6,2l5)') n,ray%source_id,m,k,t_arrival,ray%diffracted,ray%headwave
+            
+            !> Weijia, in this case, it would not to write the derivatives in frechet.dat
+            !> this would result in end-of-file reading during inversion. 2015-11-04
+            if (do_frechet_derivatives) then
+               call write_frechet_derivatives(n,m)
+            endif
 
          endif
 
