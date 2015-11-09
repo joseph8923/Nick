@@ -1407,7 +1407,9 @@ subroutine time_from_3_nodes(unode,anode1,anode2,anode3)
                print *,'dpt ',dot_product(wn1,n1),dot_product(wn2,n1)
                print *,'dp1 ',dot_product(wn1,n2) , dot_product(wn1,n3)
                print *,'dp2 ',dot_product(wn2,n2) , dot_product(wn2,n3)
-               stop 'time_from_3_nodes: two different valid solutions found in coplanar case'
+               print *, 'ERROR: time_from_3_nodes: two different valid solutions found in coplanar case'
+!               stop 'time_from_3_nodes: two different valid solutions found in coplanar case'
+               return
             endif
          endif
 

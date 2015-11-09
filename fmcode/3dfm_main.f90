@@ -1174,6 +1174,7 @@ if (no_pp_mode) then
             !> Weijia, in this case, it would not to write the derivatives in frechet.dat
             !> this would result in end-of-file reading during inversion. 2015-11-04
             if (do_frechet_derivatives) then
+               write(*,*) "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
                call write_frechet_derivatives(n,m)
             endif
 
@@ -1355,6 +1356,7 @@ if (n_receivers > 0 .and. (.not.no_pp_mode)) then
             !> Weijia, in this case, it would not to write the derivatives in frechet.dat
             !> this would result in end-of-file reading during inversion. 2015-11-04
             if (do_frechet_derivatives) then
+               write(*,*) "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
                call write_frechet_derivatives(n,m)
             endif
 

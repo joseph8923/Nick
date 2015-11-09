@@ -1,4 +1,16 @@
 
+v1.0.9 2015-11-09
+Bug fixed in propagate.f90
+In rare case, the followed error information would give
+"time_from_3_nodes: two different valid solutions found in coplanar case"
+
+This would interrupt the fm3d, resulting in the end-of-file during read by inversion.
+
+               print *, 'ERROR: time_from_3_nodes: two different valid solutions found in coplanar case'
+!               stop 'time_from_3_nodes: two different valid solutions found in coplanar case'
+               return
+
+
 v1.0.8 2015-11-04
 Bug fixed in 3dfm_main.f90: 
 In some case, it does not write the invalid path into frechet.dat. This would result in reading file end-of-file. 
